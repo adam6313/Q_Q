@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="black" name="apple-mobile-web-app-status-bar-style">
+  <meta content="telephone=no" name="format-detection">
+  <title>empty-webpack4</title>
+  <style>
+    html,
+    body,
+    div
+    {
+        font-size: 100%;
+
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        vertical-align: baseline;
+
+        border: 0;
+        outline: 0;
+    }
+
+    body
+    {
+        text-align: center;
+
+        background-color: #000;
+    }
+
+    canvas
+    {
+        position: fixed;
+        z-index: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        margin: auto;
+    }
+
+
+    #landscape,
+    #fullscreen
+    {
+        z-index: 1;
+
+        display: none;
+
+        background-color: #000;
+        background-repeat: no-repeat;
+        background-size: 50%;
+    }
+    #landscape
+    {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        background-image: url('./static/CellPhoneGif/zh-cn/pic_tips_landscape.gif');
+        background-position: center;
+    }
+
+    #fullscreen
+    {
+        overflow: scroll;
+        overflow-x: hidden;
+
+        color: #fff;
+        background-image: url('./static/CellPhoneGif/zh-cn/swipe.gif');
+        background-position: center top;
+    }
+
+  </style>
+</head>
+  <body>
+    <div id="fullscreen"></div>
+    <div id="landscape"></div>
+  </body>
+</html>
