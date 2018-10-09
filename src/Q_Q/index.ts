@@ -11,7 +11,6 @@ export default class {
         this.$options = option
         this.$config  = option['store'].getState().config
         this.$app     = new App(option['el'], this.$config)
-        this.$container_count = 0
         device.call(this.$app, this.$config)
         _init(option, this)
     }
@@ -19,17 +18,22 @@ export default class {
 
 async function _init(opts, vm) {
     if (opts.methods) initMethods(vm, opts.methods)
-    await callHook(vm, 'created')
-    await callHook(vm, 'mounted')
+    if (opts.created) await callHook(vm, 'created')
+    if (opts.mounted) await callHook(vm, 'mounted')
     if (opts.container) await initContainer(vm, opts.container)
+    if (opts.DidMount) await callHook(vm, 'DidMount')
 }
 
 async function initContainer(vm, container) {
     for (let key in container) {
-       await _init(container[key], {
-          $app: vm.$app,
-          $options: container[key] 
-       })
+      vm[key] = new _container(container[key], {
+         $app: vm.$app,
+         $options: container[key] 
+      })
+      // await _init(container[key], {
+      //    $app: vm.$app,
+      //    $options: container[key]
+      // })
     }
 }
 
@@ -37,13 +41,13 @@ function initMethods(vm, methods) {
   for (let key in methods) {
     if (Object.prototype.toString.call(methods[key]) === '[object Function]') {
       vm[key] = bind(methods[key], vm) 
-    } 
+    }
   }
 }
 
 async function callHook(vm, hook) {
   const handlers = vm.$options[hook];
-  if (handlers) await handlers.call(vm)
+  await handlers.call(vm)
 }
 
 function bind (fn, vm) {

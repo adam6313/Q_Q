@@ -1,7 +1,11 @@
-import { resources_load, resources_main } from '@/resources/index'
-import { Sprite } from 'pixi.js'
+import { resources_load, resources_main } from '@/resources/index';
+import { Sprite } from 'pixi.js';
+import app2 from './App2';
 
 export default {
+  container: {
+    app2,
+  },
   async created() {
     await resources_load()
     await resources_main()
@@ -9,10 +13,9 @@ export default {
   mounted() {
     // this = scope
     // this.$app = PIXI.Application
-
     this.Hello()
+    // console.log(this)
     let sprite = new Sprite.fromImage('https://i.imgur.com/IaUrttj.png');
-    this.$app.stage.addChild(sprite)
   },
   methods: {
     Hello() {
